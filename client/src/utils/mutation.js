@@ -12,3 +12,6 @@ export const LOGIN_USER = gql `
     }
 `;
 
+export const SIGNUP_USER = gql `
+    mutation signup()
+`
