@@ -5,7 +5,6 @@ const { gql } = require('apollo-server-express');
 const typeDefs = gql `
     type Book {
         bookId: ID
-        name: String
         authors: [String]
         description: String
         image: String
@@ -37,3 +36,5 @@ const typeDefs = gql `
         deleteBook(bookId: ID): User 
     }
 `;
+
+module.exports = typeDefs;
