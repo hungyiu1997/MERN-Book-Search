@@ -63,4 +63,3 @@ export const DELETE_BOOK = gql`
   }
 `;
 
-module.export = mutation;
