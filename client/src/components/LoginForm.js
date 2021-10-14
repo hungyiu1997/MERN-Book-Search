@@ -14,10 +14,8 @@ const LoginForm = () => {
   const [validated] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
 
-  
   const [login, {error}] = useMutation(LOGIN_USER);
 
- 
   useEffect (() => {
     if (error) {
       setShowAlert(true)
@@ -43,12 +41,10 @@ const LoginForm = () => {
     }
 
     try {
-      
       const { data } = await login({
         variables: { ...userFormData }
       })
 
-    
       console.log("handleFormSubmit: data: ", data);
       Auth.login(data.login.token);
 
