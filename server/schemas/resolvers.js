@@ -4,13 +4,15 @@ const { AuthenticationError } = require("apollo-server-express");
 
 const resolvers = {
   Query: {
-    me: async (parent, args, context) => {
+    me: async function (parent, args, context) {
+      console.log('Hello');
       if (context.user._id) {
         const userData = await User.findOne({
           _id: context.user._id,
           // .select can filter what you dont want to return
           // -password: dont need password //mongoDB internal version key
         }).select("-__v -password");
+        // console.log(userData);
         return userData;
       }
 
@@ -44,12 +46,12 @@ const resolvers = {
     },
     // save a book to a user's `savedBooks` field by adding it to the set (to prevent duplicates)
     // user comes from `req.user` created in the auth middleware function
-    async saveBook(parent, args, context) {
+    saveBook: async function (parent, args, context) {
       console.log(args);
       try {
         const updatedUser = await User.findOneAndUpdate(
           { _id: context.user._id },
-          { $addToSet: { savedBooks: args } },
+          { $addToSet: { savedBooks: args.bookData } },
           { new: true, runValidators: true }
         );
         return updatedUser;
