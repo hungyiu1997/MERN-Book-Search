@@ -1,5 +1,3 @@
-// structure the data and where you write your mutation and queries in the backend 
-
 const { gql } = require('apollo-server-express');
 
 const typeDefs = gql`

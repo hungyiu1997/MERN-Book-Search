@@ -1,9 +1,12 @@
-
+// TODO: REST API
+// import React, { useState } from 'react';
 import React, { useState, useEffect } from 'react';
 
 import { Form, Button, Alert } from 'react-bootstrap';
 
-
+// TODO: REST API
+// import { createUser } from '../utils/API';
+// TODO: import addUser mutation
 import { useMutation } from '@apollo/client';
 import { ADD_USER } from "../utils/mutations";
 
@@ -17,10 +20,10 @@ const SignupForm = () => {
   // set state for alert
   const [showAlert, setShowAlert] = useState(false);
 
-  //use mutation for add user
+  // TODO: use mutation for add user
   const [addUser, { error }] = useMutation(ADD_USER);
 
-  //use effect for error
+  // TODO: use effect for error
   useEffect(() => {
     if (error) {
       setShowAlert(true);
@@ -47,16 +50,25 @@ const SignupForm = () => {
     }
 
     try {
-      //use addUser mutation to add user
+      // TODO: REST API
+      // const response = await createUser(userFormData);
+      // if (!response.ok) {
+      //   throw new Error('something went wrong!');
+      // }
+      // const { token, user } = await response.json();
+      // console.log(user);
+      // Auth.login(token);
+
+      // TODO: use addUser mutation to add user
       const { data } = await addUser({
         variables: { ...userFormData }
       });
       console.log("handleFormSubmit: data: ", data);
       Auth.login(data.addUser.token );
     } catch (err) {
-      //we use useEffect for error from mutation
+      //TODO: we use useEffect for error from mutation
       console.error(err);
-      //REST API
+      // TODO: REST API
       // setShowAlert(true);
     }
 
