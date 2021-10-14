@@ -1,8 +1,15 @@
-import React, { useEffect, useState } from 'react';
+// TODO: REST API
+// import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+
 import { Form, Button, Alert } from 'react-bootstrap';
 
+// TODO: REST API
+// import { createUser } from '../utils/API';
+// TODO: import addUser mutation
 import { useMutation } from '@apollo/client';
-import { CREATE_USER } from '../utils/mutation';
+import { ADD_USER } from "../utils/mutations";
+
 import Auth from '../utils/auth';
 
 const SignupForm = () => {
@@ -12,15 +19,20 @@ const SignupForm = () => {
   const [validated] = useState(false);
   // set state for alert
   const [showAlert, setShowAlert] = useState(false);
-  const [createUser, {error}] = useMutation(CREATE_USER);
 
+  // TODO: use mutation for add user
+  const [addUser, { error }] = useMutation(ADD_USER);
+
+  // TODO: use effect for error
   useEffect(() => {
-    if(error) {
-      setShowAlert(true)
-    } else {
-      setShowAlert(false)
+    if (error) {
+      setShowAlert(true);
     }
-  }, [error])
+    else {
+      setShowAlert(false);
+    }
+  }, [error]);
+
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -38,14 +50,26 @@ const SignupForm = () => {
     }
 
     try {
-      const { data } = await createUser ({
-        variables: userFormData
-      })
-      console.log(data);
-      Auth.login(data.createUser.token);
+      // TODO: REST API
+      // const response = await createUser(userFormData);
+      // if (!response.ok) {
+      //   throw new Error('something went wrong!');
+      // }
+      // const { token, user } = await response.json();
+      // console.log(user);
+      // Auth.login(token);
+
+      // TODO: use addUser mutation to add user
+      const { data } = await addUser({
+        variables: { ...userFormData }
+      });
+      console.log("handleFormSubmit: data: ", data);
+      Auth.login(data.addUser.token );
     } catch (err) {
+      //TODO: we use useEffect for error from mutation
       console.error(err);
-      setShowAlert(true);
+      // TODO: REST API
+      // setShowAlert(true);
     }
 
     setUserFormData({
