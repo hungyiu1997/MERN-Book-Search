@@ -1,4 +1,4 @@
-onst jwt = require('jsonwebtoken');
+const jwt = require('jsonwebtoken');
 
 // set token secret and expiration date
 const secret = 'mysecretsshhhhh';
